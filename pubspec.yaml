@@ -1,0 +1,56 @@
+name: flutter_test_workiom
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_secure_storage: ^9.2.4
+  shared_preferences: ^2.5.3
+  flutter_bloc: ^9.1.1
+  pretty_dio_logger: ^1.4.0
+  dio: ^5.9.0
+  flutter_screenutil: ^5.9.3
+  get_it: ^8.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/font/
+    - assets/images/
+
+  fonts:
+    - family: Rubik
+      fonts:
+        - asset: assets/font/Rubik-Black.ttf
+        - asset: assets/font/Rubik-BlackItalic.ttf
+        - asset: assets/font/Rubik-Bold.ttf
+        - asset: assets/font/Rubik-BoldItalic.ttf
+        - asset: assets/font/Rubik-ExtraBold.ttf
+        - asset: assets/font/Rubik-ExtraBoldItalic.ttf
+        - asset: assets/font/Rubik-Italic.ttf
+        - asset: assets/font/Rubik-Italic-VariableFont_wght.ttf
+        - asset: assets/font/Rubik-Light.ttf
+        - asset: assets/font/Rubik-LightItalic.ttf
+        - asset: assets/font/Rubik-Medium.ttf
+        - asset: assets/font/Rubik-MediumItalic.ttf
+        - asset: assets/font/Rubik-Regular.ttf
+        - asset: assets/font/Rubik-SemiBold.ttf
+        - asset: assets/font/Rubik-SemiBoldItalic.ttf
+        - asset: assets/font/Rubik-VariableFont_wght.ttf

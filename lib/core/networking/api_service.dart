@@ -1,7 +1,11 @@
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import '../../features/second_screen_completing_sign_up/data/models/sign_up_request_body.dart';
+import '../../features/sing_up/data/models/editions_response.dart';
 import 'api_constants.dart';
 import 'dio_factory.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class ApiService {
   Dio dio = DioFactory.getDio();
@@ -9,9 +13,12 @@ class ApiService {
 
   Future<TheResponse> signup(SignupRequestBody signupRequestBody) async {
     try {
+      tz.initializeTimeZones();
+      final location = tz.getLocation('America/New_York');
+      final now = tz.TZDateTime.now(location);
       Response response = await dio.post(
         "${ApiConstants.apiBaseUrl}services/app/TenantRegistration/RegisterTenant",
-        queryParameters: {"timeZone": "Europe/Istanbul"},
+        queryParameters: {"timeZone": location.name},
         options: Options(
           sendTimeout: Duration(minutes: requestDurationTime),
           receiveTimeout: Duration(minutes: requestDurationTime),
@@ -25,6 +32,37 @@ class ApiService {
           e.response!.statusCode! >= 400 &&
           e.response!.statusCode! < 500) {
         return TheResponse(body: e.response!.data["detail"], statusCode: 400);
+      }
+      return TheResponse(body: 'Could not connect to server', statusCode: 500);
+    }
+  }
+
+  Future<TheResponse> getEditionsForSelect() async {
+    try {
+      Response response = await dio.get(
+        "${ApiConstants.apiBaseUrl}services/app/TenantRegistration/GetEditionsForSelect",
+        options: Options(
+          sendTimeout: Duration(minutes: requestDurationTime),
+          receiveTimeout: Duration(minutes: requestDurationTime),
+        ),
+      );
+
+      Map<String, dynamic> jsonResponse = response.data;
+
+      EditionsResponse editionsResponse = EditionsResponse.fromJson(
+        jsonResponse,
+      );
+
+      TheResponse theResponse = TheResponse(
+        statusCode: 200,
+        body: editionsResponse,
+      );
+      return theResponse;
+    } on DioException catch (e) {
+      if (e.response != null &&
+          e.response!.statusCode! >= 400 &&
+          e.response!.statusCode! < 500) {
+        return TheResponse(body: 'Something wrong', statusCode: 400);
       }
       return TheResponse(body: 'Could not connect to server', statusCode: 500);
     }

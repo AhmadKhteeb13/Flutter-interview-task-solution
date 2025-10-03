@@ -7,7 +7,6 @@ import 'package:flutter_test_workiom/core/theming/colors.dart';
 import 'package:flutter_test_workiom/core/theming/font_weight_helper.dart';
 import 'package:flutter_test_workiom/core/theming/styles.dart';
 import 'package:flutter_test_workiom/core/widgets/super_button.dart';
-
 import '../../../core/routing/routers.dart';
 
 class SignUp extends StatelessWidget {

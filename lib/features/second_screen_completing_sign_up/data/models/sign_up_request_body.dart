@@ -1,13 +1,13 @@
-
 class SignupRequestBody {
-  final String password,email,firstName,lastName,workSpaceName;
-
+  final String password, email, firstName, lastName, workSpaceName;
+  final int editionId;
   SignupRequestBody({
     required this.email,
     required this.firstName,
     required this.password,
     required this.lastName,
-    required this.workSpaceName
+    required this.workSpaceName,
+    required this.editionId
   });
 
   toJson() {
@@ -17,10 +17,9 @@ class SignupRequestBody {
       'adminLastName': lastName,
       'adminPassword': password,
       'captchaResponse': null,
-      'editionId': 16,
+      'editionId': editionId,
       'name': workSpaceName,
-      'tenancyName':workSpaceName
+      'tenancyName': workSpaceName,
     };
   }
 }
-

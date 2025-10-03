@@ -18,17 +18,19 @@ class AppRouter {
     switch (settings.name) {
       case Routes.signupScreen:
         return MaterialPageRoute(
-          builder: (context) => MultiBlocProvider(
+          builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(value: SignUpCubit(SignUpRepo(ApiService()))),
+              BlocProvider<SignUpCubit>(
+                create: (_) => SignUpCubit(SignUpRepo(ApiService())),
+              ),
             ],
-            child: const SignUp(),
+            child: SignUp(),
           ),
         );
 
       case Routes.firstScreenCompletingSignUp:
         return MaterialPageRoute(
-          builder: (context) => MultiBlocProvider(
+          builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider.value(
                 value: FirstScreenCompletingSignUpCubit(
@@ -41,7 +43,7 @@ class AppRouter {
         );
       case Routes.secondScreenCompletingSignUp:
         return MaterialPageRoute(
-          builder: (context) => MultiBlocProvider(
+          builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider.value(
                 value: SecondScreenCompletingSignUpCubit(
@@ -57,7 +59,16 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SuccessScreen());
 
       default:
-        return MaterialPageRoute(builder: (_) => const SignUp());
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider<SignUpCubit>(
+                create: (_) => SignUpCubit(SignUpRepo(ApiService())),
+              ),
+            ],
+            child: SignUp(),
+          ),
+        );
     }
   }
 }

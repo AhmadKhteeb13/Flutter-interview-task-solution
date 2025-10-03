@@ -39,6 +39,10 @@ class _SecondScreenCompletingSignUpState
 
     context
         .read<SecondScreenCompletingSignUpCubit>()
+        .emitGetEditionsForSelect();
+
+    context
+        .read<SecondScreenCompletingSignUpCubit>()
         .workspaceNameController
         .addListener(() {
           setState(() {});
